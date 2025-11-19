@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sprazo — Mock E-commerce Hero</title>
+  <style>
+    :root{
+      --accent:#2b9a95;
+      --muted:#dfe9e9;
+      --dark:#213043;
+      --soft:#f3f7f7;
+      --card:#ffffff;
+      --radius:14px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--dark);
+      background:linear-gradient(180deg,var(--soft),#fff);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.35;
+    }
+
+    /* top promo bar */
+    .promo{
+      background:#0b1620;
+      color:#fff;
+      font-size:14px;
+      padding:8px 20px;
+      text-align:center;
+    }
+
+    .header{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      padding:18px 28px;
+      border-bottom:1px solid #e8efef;
+      background:linear-gradient(to right,#fff, #f7fbfb);
+    }
+
+    .logo{
+      font-weight:700;
+      font-size:24px;
+      color:var(--dark);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo .dot{ color:var(--accent); font-weight:900; }
+
+    .search-wrap{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .search{
+      width:min(720px,100%);
+      display:flex;
+      gap:8px;
+      align-items:center;
+      border-radius:24px;
+      border:1px solid #d6e8e7;
+      padding:10px 14px;
+      background:#fff;
+    }
+    .search select, .search input{
+      border:0;
+      outline:0;
+      font-size:15px;
+      background:transparent;
+    }
+    .search select{ padding-right:6px; color:#5b6b6b; }
+    .search input{ flex:1; }
+
+    .icons{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      color:#5b6b6b;
+      font-size:14px;
+    }
+    .icon-item{ display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; font-size:12px; }
+
+    /* nav */
+    nav.navbar{
+      display:flex;
+      gap:18px;
+      padding:12px 28px;
+      align-items:center;
+      border-bottom:1px solid #eef6f6;
+      background:transparent;
+    }
+    nav.navbar a{ color:#3b5151; text-decoration:none; padding:8px 10px; border-radius:8px; font-size:15px; }
+    nav.navbar a:hover{ background:rgba(43,154,149,0.06); }
+
+    /* hero */
+    .hero{
+      display:flex;
+      gap:40px;
+      align-items:center;
+      padding:48px 6%;
+      min-height:420px;
+    }
+    .hero-left{
+      flex:1;
+      max-width:720px;
+    }
+    .eyebrow{
+      font-size:13px;
+      color:var(--accent);
+      margin-bottom:10px;
+    }
+    .hero h1{
+      font-size:56px;
+      margin:0 0 14px;
+      color:var(--dark);
+      font-weight:600;
+      line-height:1.02;
+    }
+    .hero h1 .accent{
+      color:var(--accent);
+      font-weight:800;
+      display:block;
+      font-size:56px;
+    }
+    .hero p{
+      color:#6b7b7b;
+      font-size:16px;
+      margin:14px 0 26px;
+      max-width:620px;
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 20px;
+      border-radius:10px;
+      background:var(--dark);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    /* right column card */
+    .hero-right{
+      width:360px;
+      display:flex;
+      justify-content:flex-end;
+    }
+    .card{
+      width:320px;
+      background:rgba(255,255,255,0.9);
+      border-radius:16px;
+      padding:20px;
+      box-shadow:0 6px 20px rgba(34,60,80,0.06);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-direction:column;
+    }
+    .avatars{
+      display:flex;
+      margin-top:4px;
+      gap:-10px;
+      width:100%;
+      justify-content:center;
+      align-items:center;
+    }
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:3px solid #fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      box-shadow:0 2px 6px rgba(0,0,0,0.06);
+      margin-left:-12px;
+      background:var(--muted);
+      color:var(--dark);
+    }
+    .avatar.plus{
+      background:var(--accent);
+      color:#fff;
+      margin-left:-8px;
+      font-size:20px;
+    }
+    .stat{
+      margin-top:10px;
+      text-align:center;
+      color:var(--dark);
+    }
+    .stat h3{
+      margin:0;
+      font-size:20px;
+    }
+    .stat p{ margin:6px 0 0; color:#7a8b8b; font-size:13px; }
+
+    /* subtle background doodles */
+    .doodle{
+      position:absolute;
+      right:6%;
+      top:220px;
+      width:420px;
+      height:420px;
+      opacity:0.08;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(43,154,149,0.06) 0 2px, transparent 4px),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="420" height="420"><g fill="none" stroke="%23cfe9e8" stroke-width="2" opacity="0.6"><path d="M10 200 q50 -40 130 -40 q80 0 160 40 q60 36 100 36"/></g></svg>') no-repeat center/contain;
+    }
+
+    @media (max-width:880px){
+      .hero{ flex-direction:column; align-items:flex-start; padding:28px; }
+      .hero-right{ width:100%; justify-content:flex-start; }
+      .hero h1{ font-size:36px; }
+      .card{ width:100%; }
+      .search{ width:100%;}
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="promo">Flat 50% Off On Grocery Shop.</div>
+
+  <header class="header">
+    <div class="logo">
+      <span style="font-size:18px; padding:6px 10px; border-radius:8px; background:var(--muted); color:var(--accent)">S.</span>
+      <div>Sprazo <span class="dot">.</span></div>
+    </div>
+
+    <div class="search-wrap">
+      <div class="search" role="search">
+        <select aria-label="category">
+          <option>Vegetables</option>
+          <option>Fruits</option>
+          <option>Grocery</option>
+        </select>
+        <input id="q" placeholder="Search products..." />
+        <button class="btn" onclick="alert('Search: '+document.getElementById('q').value)">Search</button>
+      </div>
+    </div>
+
+    <div class="icons">
+      <div class="icon-item">
+        <div style="font-size:18px">👤</div>
+        <div>Account<br><strong style="font-weight:600">Login</strong></div>
+      </div>
+      <div class="icon-item">
+        <div style="font-size:18px">❤</div>
+        <div>3 Items<br><strong>Wishlist</strong></div>
+      </div>
+      <div class="icon-item">
+        <div style="font-size:18px">🛍️</div>
+        <div>4 Items<br><strong>Cart</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="#">Home</a>
+    <a href="#">Categories ▾</a>
+    <a href="#">Products ▾</a>
+    <a href="#">Pages ▾</a>
+    <a href="#">Blog ▾</a>
+    <a href="#">Offers</a>
+  </nav>
+
+  <main class="hero" role="main">
+    <div class="hero-left">
+      <div class="eyebrow">Your One - Stop Shop For</div>
+      <h1>
+        <span>Quality</span>
+        <span class="accent">Groceries</span>
+      </h1>
+      <p>Expand your business worldwide in just minutes with tailored currencies, languages, and customer experiences designed for every market.</p>
+      <a class="btn" href="#">Shop Now</a>
+    </div>
+
+    <div class="hero-right">
+      <div class="card" aria-hidden="false">
+        <div style="width:100%; text-align:center;">
+          <div class="avatars" aria-hidden="true">
+            <div class="avatar">AN</div>
+            <div class="avatar">SR</div>
+            <div class="avatar">MK</div>
+            <div class="avatar">JP</div>
+            <div class="avatar plus">+</div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <h3>500k +</h3>
+          <p>Happy Customer</p>
+        </div>
+
+        <div style="margin-top:6px; width:100%; text-align:center;">
+          <svg width="80" height="80" viewBox="0 0 100 100" aria-hidden="true">
+            <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#d9f2f1"/><stop offset="1" stop-color="#fff"/></linearGradient></defs>
+            <circle cx="50" cy="50" r="40" fill="url(#g)" stroke="#d6eae9" stroke-width="1.5"></circle>
+            <text x="50" y="56" text-anchor="middle" font-size="34" fill="#2b9a95" font-weight="700">S</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="doodle" aria-hidden="true"></div>
+  </main>
+
+  <script>
+    // small script to simulate dynamic cart/wishlist counters and QR preview behaviour
+    // (hooks are left minimal so you can extend)
+    document.addEventListener('keydown', function(e){
+      // press / to focus search
+      if(e.key === '/'){ e.preventDefault(); document.getElementById('q').focus(); }
+    });
+  </script>
+</body>
+</html>
